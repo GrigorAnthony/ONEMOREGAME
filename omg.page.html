@@ -167,27 +167,44 @@
             display: none;
         }
 
-        /* ЛОГОТИП — 1MOREGAME, буквы плотнее */
+        /* ЛОГОТИП — картинка с неоновым мерцанием */
         .logo {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #ff2d7a, #b400ff, #00d4ff, #ff2d7a);
-            background-size: 240% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientFlow 6s ease infinite;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(180, 0, 255, 0.3), 0 0 40px rgba(255, 45, 122, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
 
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .logo img {
+            max-width: auto;
+            height: auto;
+            max-width: 800px;
+            width: 120%;
+            max-height: 800px; 
+            filter: drop-shadow(0 0 5px rgba(180, 0, 255, 0.5))
+                    drop-shadow(0 0 10px rgba(255, 45, 122, 0.3));
+            animation: neonPulse 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .logo img:hover {
+            filter: drop-shadow(0 0 15px rgba(180, 0, 255, 0.8))
+                    drop-shadow(0 0 25px rgba(255, 45, 122, 0.5));
+        }
+
+        @keyframes neonPulse {
+            0% {
+                filter: drop-shadow(0 0 3px rgba(180, 0, 255, 0.4))
+                        drop-shadow(0 0 6px rgba(255, 45, 122, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 12px rgba(180, 0, 255, 0.8))
+                        drop-shadow(0 0 20px rgba(255, 45, 122, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 3px rgba(180, 0, 255, 0.4))
+                        drop-shadow(0 0 6px rgba(255, 45, 122, 0.2));
+            }
         }
 
         .stats-bar {
@@ -749,7 +766,10 @@
 
 <div class="container">
     <div class="header">
-        <div class="logo">1MOREGAME</div>
+        <!-- ЛОГОТИП — картинка вместо текста -->
+        <div class="logo">
+            <img src="logo1mg.png" alt="1MOREGAME">
+        </div>
 
         <div class="stats-bar" id="statsBar">
             <div class="stat-item total">📊 <span id="statTotal">0</span> всего</div>
@@ -834,31 +854,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    
-    // Инициализация EmailJS
-    emailjs.init("YOUR_PUBLIC_KEY"); // Нужно зарегистрироваться на emailjs.com и получить ключ
-    
-    // Функция отправки письма с данными
-    async function sendWelcomeEmail(email, password) {
-        try {
-            const templateParams = {
-                to_email: email,
-                user_email: email,
-                user_password: password,
-                site_name: "1MOREGAME",
-                login_url: window.location.href
-            };
-            
-            // Отправка через EmailJS (нужно создать шаблон)
-            // await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams);
-            console.log(`📧 Письмо должно быть отправлено на ${email} с логином и паролем`);
-            
-            // Показываем сообщение пользователю
-            showToast(`✅ Письмо с данными для входа отправлено на ${email}`);
-        } catch (error) {
-            console.error("Ошибка отправки письма:", error);
-        }
-    }
     
     // Состояние
     let gamesList = [];
@@ -1255,7 +1250,7 @@
         showToast(`🎲 Выпало: "${random.name}"`);
     }
     
-    // Авторизация с отправкой письма
+    // Авторизация
     function openModal(loginMode = true) {
         isLoginMode = loginMode;
         modalTitle.textContent = loginMode ? 'Вход' : 'Регистрация';
@@ -1278,15 +1273,8 @@
                 await signInWithEmailAndPassword(auth, email, password);
                 showToast('✅ Добро пожаловать!');
             } else {
-                // Регистрация
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                
-                // Отправка письма с подтверждением
                 await sendEmailVerification(userCredential.user);
-                
-                // Отправка письма с данными (логин и пароль)
-                await sendWelcomeEmail(email, password);
-                
                 showToast('✅ Регистрация успешна! Проверь почту для подтверждения.');
             }
             modal.classList.remove('show');
@@ -1395,7 +1383,7 @@
         updateStats();
     });
     
-    console.log('🔥 1MOREGAME | готова к работе!');
+    console.log('🔥 1MOREGAME | полная версия с логотипом | неоновое мерцание');
 </script>
 </body>
 </html>
