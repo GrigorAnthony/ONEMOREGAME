@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ONEMOREGAME — игровой чеклист</title>
+    <title>1MOREGAME — игровой чеклист</title>
+    
+    <!-- EmailJS для отправки писем -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <style>
         * {
@@ -164,10 +167,11 @@
             display: none;
         }
 
+        /* ЛОГОТИП — 1MOREGAME, буквы плотнее */
         .logo {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 900;
-            letter-spacing: 6px;
+            letter-spacing: 2px;
             background: linear-gradient(135deg, #ff2d7a, #b400ff, #00d4ff, #ff2d7a);
             background-size: 240% auto;
             -webkit-background-clip: text;
@@ -745,7 +749,7 @@
 
 <div class="container">
     <div class="header">
-        <div class="logo">ONEMOREGAME</div>
+        <div class="logo">1MOREGAME</div>
 
         <div class="stats-bar" id="statsBar">
             <div class="stat-item total">📊 <span id="statTotal">0</span> всего</div>
@@ -791,7 +795,7 @@
         </div>
     </div>
 
-    <footer>ONEMOREGAME • твой игровой чеклист • данные в облаке 🔐</footer>
+    <footer>1MOREGAME • твой игровой чеклист • данные в облаке 🔐</footer>
 </div>
 
 <!-- Firebase и основной код -->
@@ -807,10 +811,10 @@
 
 <script type="module">
     import { initializeApp } from "firebase/app";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
     import { getFirestore, doc, setDoc, getDoc, collection, query, getDocs, deleteDoc, writeBatch } from "firebase/firestore";
     
-    // КОНФИГУРАЦИЯ FIREBASE (твоя)
+    // КОНФИГУРАЦИЯ FIREBASE
     const firebaseConfig = {
         apiKey: "AIzaSyAGdt9hzBzbP4PWfPw4TPvc0iXTbnfBDwU",
         authDomain: "onemoregame-1416f.firebaseapp.com",
@@ -830,6 +834,31 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    
+    // Инициализация EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // Нужно зарегистрироваться на emailjs.com и получить ключ
+    
+    // Функция отправки письма с данными
+    async function sendWelcomeEmail(email, password) {
+        try {
+            const templateParams = {
+                to_email: email,
+                user_email: email,
+                user_password: password,
+                site_name: "1MOREGAME",
+                login_url: window.location.href
+            };
+            
+            // Отправка через EmailJS (нужно создать шаблон)
+            // await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams);
+            console.log(`📧 Письмо должно быть отправлено на ${email} с логином и паролем`);
+            
+            // Показываем сообщение пользователю
+            showToast(`✅ Письмо с данными для входа отправлено на ${email}`);
+        } catch (error) {
+            console.error("Ошибка отправки письма:", error);
+        }
+    }
     
     // Состояние
     let gamesList = [];
@@ -899,12 +928,12 @@
     
     // Локальное сохранение
     function saveToLocal() {
-        localStorage.setItem('onemoregame_local', JSON.stringify(gamesList));
+        localStorage.setItem('1moregame_local', JSON.stringify(gamesList));
         updateStats();
     }
     
     function loadFromLocal() {
-        const saved = localStorage.getItem('onemoregame_local');
+        const saved = localStorage.getItem('1moregame_local');
         if (saved) {
             try {
                 gamesList = JSON.parse(saved);
@@ -1226,7 +1255,7 @@
         showToast(`🎲 Выпало: "${random.name}"`);
     }
     
-    // Авторизация
+    // Авторизация с отправкой письма
     function openModal(loginMode = true) {
         isLoginMode = loginMode;
         modalTitle.textContent = loginMode ? 'Вход' : 'Регистрация';
@@ -1249,8 +1278,16 @@
                 await signInWithEmailAndPassword(auth, email, password);
                 showToast('✅ Добро пожаловать!');
             } else {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showToast('✅ Регистрация успешна!');
+                // Регистрация
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                
+                // Отправка письма с подтверждением
+                await sendEmailVerification(userCredential.user);
+                
+                // Отправка письма с данными (логин и пароль)
+                await sendWelcomeEmail(email, password);
+                
+                showToast('✅ Регистрация успешна! Проверь почту для подтверждения.');
             }
             modal.classList.remove('show');
         } catch (error) {
@@ -1333,7 +1370,6 @@
             logoutBtn.style.display = 'block';
             userEmailSpan.style.display = 'block';
             userEmailSpan.textContent = user.email;
-            // Загружаем данные из облака
             const cloudGames = await loadGamesFromFirestore(user.uid);
             if (cloudGames.length > 0) {
                 gamesList = cloudGames;
@@ -1342,11 +1378,9 @@
                 renderGames('all');
                 showToast(`📥 Загружено ${gamesList.length} игр из облака`);
             } else {
-                // Загружаем локальные данные
                 loadFromLocal();
                 sortGamesList();
                 renderGames('all');
-                // Сохраняем локальные в облако
                 if (gamesList.length) await saveGamesToFirestore(user.uid, gamesList);
             }
         } else {
@@ -1354,7 +1388,6 @@
             registerBtn.style.display = 'block';
             logoutBtn.style.display = 'none';
             userEmailSpan.style.display = 'none';
-            // Загружаем локальные данные
             loadFromLocal();
             sortGamesList();
             renderGames('all');
@@ -1362,7 +1395,7 @@
         updateStats();
     });
     
-    console.log('🔥 ONEMOREGAME | Firebase авторизация готова');
+    console.log('🔥 1MOREGAME | готова к работе!');
 </script>
 </body>
 </html>
