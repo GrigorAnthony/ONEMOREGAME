@@ -927,21 +927,17 @@
         updateStats();
     }
     
-    function loadFromLocal() {
-        const saved = localStorage.getItem('1moregame_local');
-        if (saved) {
-            try {
-                gamesList = JSON.parse(saved);
-            } catch(e) { console.warn(e); }
-        }
-        if (!gamesList.length) {
-            gamesList = [
-                { id: 41494, name: "Cyberpunk 2077", cover: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1t8e.jpg", description: "Ролевой экшен в открытом мире.", status: "playing", rating: 4, pinned: false, addedDate: Date.now() - 86400000 },
-                { id: 12020, name: "The Witcher 3", cover: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1wgl.jpg", description: "Легендарное фэнтези.", status: "completed", rating: 5, pinned: true, addedDate: Date.now() - 172800000 },
-                { id: 5679, name: "Hades", cover: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1p7h.jpg", description: "Roguelike про побег из царства мертвых.", status: "planned", rating: 0, pinned: false, addedDate: Date.now() - 259200000 }
-            ];
-        }
+function loadFromLocal() {
+    const saved = localStorage.getItem('1moregame_local');
+    if (saved) {
+        try {
+            gamesList = JSON.parse(saved);
+        } catch(e) { console.warn(e); }
     }
+    if (!gamesList.length) {
+        gamesList = [];  // ← теперь пустой список
+    }
+}
     
     function updateStats() {
         const total = gamesList.length;
