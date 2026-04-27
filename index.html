@@ -164,10 +164,21 @@
             display: none;
         }
 
+        /* ========== ПОДКЛЮЧЕНИЕ ШРИФТА MIGHTY SOULY ========== */
+        @font-face {
+            font-family: 'MightySouly';
+            src: url('mighty-souly.regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* ========== ЛОГОТИП ========== */
         .logo {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
+            font-family: 'MightySouly', 'Impact', 'Arial Black', monospace;
+            font-size: 4rem;
+            font-weight: normal;
+            letter-spacing: 4px;
             background: linear-gradient(135deg, #ff2d7a, #b400ff, #00d4ff, #ff2d7a);
             background-size: 240% auto;
             -webkit-background-clip: text;
@@ -340,6 +351,10 @@
             display: flex;
             align-items: center;
             gap: 12px;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
         }
 
         .suggestion-item:hover {
@@ -805,7 +820,7 @@
 <script type="module">
     import { initializeApp } from "firebase/app";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-    import { getFirestore, doc, setDoc, getDoc, collection, query, getDocs, deleteDoc, writeBatch } from "firebase/firestore";
+    import { getFirestore, doc, setDoc, collection, query, getDocs, deleteDoc, writeBatch } from "firebase/firestore";
     
     const firebaseConfig = {
         apiKey: "AIzaSyAGdt9hzBzbP4PWfPw4TPvc0iXTbnfBDwU",
@@ -853,24 +868,25 @@
         setTimeout(() => toast.remove(), 2500);
     }
     
-    // ========== FIRESTORE СИНХРОНИЗАЦИЯ ==========
+    // === FIRESTORE ===
     async function saveGamesToFirestore(userId, games) {
-        if (!userId || !games) return;
+        if (!userId) return false;
         try {
             const userGamesRef = collection(db, 'users', userId, 'games');
             const oldGames = await getDocs(userGamesRef);
             const batch = writeBatch(db);
-            for (const docSnapshot of oldGames.docs) {
-                batch.delete(docSnapshot.ref);
-            }
-            for (const game of games) {
+            oldGames.forEach(doc => batch.delete(doc.ref));
+            games.forEach(game => {
                 const gameRef = doc(db, 'users', userId, 'games', game.id.toString());
                 batch.set(gameRef, game);
-            }
+            });
             await batch.commit();
-            console.log('✅ Сохранено в облако');
+            console.log('✅ Сохранено в Firestore', games.length);
+            return true;
         } catch (error) {
-            console.error('Ошибка сохранения в Firestore:', error);
+            console.error('Ошибка сохранения:', error);
+            showToast('Ошибка сохранения в облако', true);
+            return false;
         }
     }
     
@@ -880,39 +896,16 @@
             const userGamesRef = collection(db, 'users', userId, 'games');
             const snapshot = await getDocs(userGamesRef);
             const games = [];
-            snapshot.forEach((doc) => {
-                games.push(doc.data());
-            });
-            console.log(`📥 Загружено ${games.length} игр из облака`);
+            snapshot.forEach(doc => games.push(doc.data()));
+            console.log(`📥 Загружено ${games.length} игр из Firestore`);
             return games;
         } catch (error) {
-            console.error('Ошибка загрузки из Firestore:', error);
+            console.error('Ошибка загрузки:', error);
             return [];
         }
     }
     
-    // Сохранение в localStorage (кэш) и в Firestore
-    function saveToLocalAndCloud() {
-        localStorage.setItem('1moregame_local', JSON.stringify(gamesList));
-        updateStats();
-        if (currentUser) {
-            saveGamesToFirestore(currentUser.uid, gamesList);
-        }
-    }
-    
-    // Загрузка из localStorage (кэш) — только для неавторизованных
-    function loadFromLocal() {
-        const saved = localStorage.getItem('1moregame_local');
-        if (saved) {
-            try {
-                gamesList = JSON.parse(saved);
-            } catch(e) { console.warn(e); }
-        }
-        if (!gamesList.length) {
-            gamesList = [];
-        }
-    }
-    
+    // === ОБНОВЛЕНИЕ СТАТИСТИКИ ===
     function updateStats() {
         const total = gamesList.length;
         const completed = gamesList.filter(g => g.status === 'completed').length;
@@ -942,24 +935,25 @@
         gamesList = [...pinned, ...unpinned];
     }
     
-    function setRating(gameId, rating) {
+    // === ДЕЙСТВИЯ ===
+    async function setRating(gameId, rating) {
         const game = gamesList.find(g => g.id === gameId);
         if (game) {
             game.rating = rating;
             sortGamesList();
-            saveToLocalAndCloud();
             renderGames(getCurrentFilter());
+            if (currentUser) await saveGamesToFirestore(currentUser.uid, gamesList);
             showToast(`⭐ Рейтинг "${game.name}": ${rating}/5`);
         }
     }
     
-    function togglePin(gameId) {
+    async function togglePin(gameId) {
         const game = gamesList.find(g => g.id === gameId);
         if (game) {
             game.pinned = !game.pinned;
             sortGamesList();
-            saveToLocalAndCloud();
             renderGames(getCurrentFilter());
+            if (currentUser) await saveGamesToFirestore(currentUser.uid, gamesList);
             showToast(game.pinned ? `📌 "${game.name}" закреплена` : `📍 "${game.name}" откреплена`);
         }
     }
@@ -986,13 +980,12 @@
             filteredGames = filteredGames.filter(g => g.name.toLowerCase().includes(currentLocalSearch.toLowerCase()));
         }
         
-        if (filteredGames.length === 0 && gamesList.length === 0) {
-            container.innerHTML = `<div class="empty-msg">✨ Список пуст ✨<br>🔍 найди игру в строке поиска выше</div>`;
-            updateStats();
-            return;
-        }
-        if (filteredGames.length === 0 && gamesList.length > 0) {
-            container.innerHTML = `<div class="empty-msg">✨ нет игр по вашему запросу ✨<br>🔍 попробуй другой поиск</div>`;
+        if (filteredGames.length === 0) {
+            if (!currentUser) {
+                container.innerHTML = `<div class="empty-msg">🔐 Войдите в аккаунт, чтобы видеть свой игровой список</div>`;
+            } else {
+                container.innerHTML = `<div class="empty-msg">✨ Список пуст ✨<br>🔍 найди игру в строке поиска выше</div>`;
+            }
             updateStats();
             return;
         }
@@ -1019,40 +1012,40 @@
         `).join('');
         
         document.querySelectorAll('.pin-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
-                togglePin(parseInt(btn.dataset.id));
+                await togglePin(parseInt(btn.dataset.id));
             });
         });
         document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', (e) => {
+            star.addEventListener('click', async (e) => {
                 e.stopPropagation();
-                setRating(parseInt(star.dataset.id), parseInt(star.dataset.rating));
+                await setRating(parseInt(star.dataset.id), parseInt(star.dataset.rating));
             });
         });
         document.querySelectorAll('.status-select').forEach(select => {
-            select.addEventListener('change', (e) => {
+            select.addEventListener('change', async (e) => {
                 const gameId = parseInt(select.dataset.id);
                 const newStatus = select.value;
                 const game = gamesList.find(g => g.id === gameId);
                 if (game) {
                     game.status = newStatus;
                     sortGamesList();
-                    saveToLocalAndCloud();
                     renderGames(getCurrentFilter());
+                    if (currentUser) await saveGamesToFirestore(currentUser.uid, gamesList);
                     showToast(`статус "${game.name}" обновлён`);
                 }
             });
         });
         document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', async (e) => {
                 const gameId = parseInt(btn.dataset.id);
                 const gameName = btn.dataset.name;
                 if (confirm(`❓ Удалить "${gameName}"?`)) {
                     gamesList = gamesList.filter(g => g.id !== gameId);
                     sortGamesList();
-                    saveToLocalAndCloud();
                     renderGames(getCurrentFilter());
+                    if (currentUser) await saveGamesToFirestore(currentUser.uid, gamesList);
                     showToast(`🗑 "${gameName}" удалена`);
                 }
             });
@@ -1060,7 +1053,7 @@
         updateStats();
     }
     
-    // IGDB функции
+    // === IGDB ===
     async function getTwitchToken() {
         if (currentAccessToken && Date.now() < tokenExpiration) return currentAccessToken;
         try {
@@ -1079,26 +1072,32 @@
             tokenExpiration = Date.now() + (data.expires_in * 1000);
             return currentAccessToken;
         } catch (error) {
+            console.error('Ошибка получения токена:', error);
             throw new Error("Ошибка авторизации Twitch");
         }
     }
     
     async function searchIGDB(query) {
         if (!query || query.length < 2) return [];
-        const token = await getTwitchToken();
-        const safeQuery = query.replace(/'/g, "\\'");
-        const requestBody = `search "${safeQuery}"; fields name, summary, cover.url, cover.image_id, first_release_date; limit 6;`;
-        const response = await fetch(CORS_PROXY + 'https://api.igdb.com/v4/games', {
-            method: 'POST',
-            headers: {
-                'Client-ID': TWITCH_CLIENT_ID,
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'text/plain'
-            },
-            body: requestBody
-        });
-        if (!response.ok) throw new Error(`IGDB error: ${response.status}`);
-        return await response.json();
+        try {
+            const token = await getTwitchToken();
+            const safeQuery = query.replace(/'/g, "\\'");
+            const requestBody = `search "${safeQuery}"; fields name, summary, cover.url, cover.image_id, first_release_date; limit 6;`;
+            const response = await fetch(CORS_PROXY + 'https://api.igdb.com/v4/games', {
+                method: 'POST',
+                headers: {
+                    'Client-ID': TWITCH_CLIENT_ID,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'text/plain'
+                },
+                body: requestBody
+            });
+            if (!response.ok) throw new Error(`IGDB error: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('Ошибка IGDB:', error);
+            return [];
+        }
     }
     
     function getCoverUrl(coverData, size = 'cover_small') {
@@ -1109,51 +1108,56 @@
     }
     
     async function fetchSuggestions(query) {
-        if (!query || query.length < 2) {
+        if (!query || query.length < 2 || !currentUser) {
             document.getElementById('suggestions').classList.remove('show');
             return;
         }
-        try {
-            const results = await searchIGDB(query);
-            const dropdown = document.getElementById('suggestions');
-            if (!results.length) {
-                dropdown.classList.remove('show');
-                return;
-            }
-            dropdown.innerHTML = results.map(game => {
-                const coverSmall = getCoverUrl(game.cover, 'cover_small');
-                const year = game.first_release_date ? new Date(game.first_release_date * 1000).getFullYear() : '';
-                return `
-                    <div class="suggestion-item" data-game-id="${game.id}" data-game-name="${escapeHtml(game.name)}" data-game-cover="${getCoverUrl(game.cover, 'cover_big') || ''}" data-game-summary="${escapeHtml(game.summary || '')}">
-                        <div class="suggestion-cover" style="background-image: url('${coverSmall || ''}');"></div>
-                        <div class="suggestion-name">${escapeHtml(game.name)}${year ? ` (${year})` : ''}</div>
-                    </div>
-                `;
-            }).join('');
-            dropdown.classList.add('show');
-            document.querySelectorAll('.suggestion-item').forEach(el => {
-                el.addEventListener('click', () => {
-                    addGame({
-                        id: parseInt(el.dataset.gameId),
-                        name: el.dataset.gameName,
-                        cover: el.dataset.gameCover,
-                        summary: el.dataset.gameSummary
-                    });
-                    document.getElementById('gameSearchInput').value = '';
-                    dropdown.classList.remove('show');
-                });
-            });
-        } catch (error) {
-            console.error('Ошибка подсказок:', error);
+        const results = await searchIGDB(query);
+        const dropdown = document.getElementById('suggestions');
+        if (!results.length) {
+            dropdown.classList.remove('show');
+            return;
         }
+        dropdown.innerHTML = results.map(game => {
+            const coverSmall = getCoverUrl(game.cover, 'cover_small');
+            const year = game.first_release_date ? new Date(game.first_release_date * 1000).getFullYear() : '';
+            return `
+                <div class="suggestion-item" 
+                     data-game-id="${game.id}" 
+                     data-game-name="${escapeHtml(game.name)}" 
+                     data-game-cover="${getCoverUrl(game.cover, 'cover_big') || ''}" 
+                     data-game-summary="${escapeHtml(game.summary || '')}">
+                    <div class="suggestion-cover" style="background-image: url('${coverSmall || ''}');"></div>
+                    <div class="suggestion-name">${escapeHtml(game.name)}${year ? ` (${year})` : ''}</div>
+                </div>
+            `;
+        }).join('');
+        dropdown.classList.add('show');
+        
+        document.querySelectorAll('.suggestion-item').forEach(el => {
+            el.addEventListener('click', async () => {
+                await addGame({
+                    id: parseInt(el.dataset.gameId),
+                    name: el.dataset.gameName,
+                    cover: el.dataset.gameCover,
+                    summary: el.dataset.gameSummary
+                });
+                document.getElementById('gameSearchInput').value = '';
+                dropdown.classList.remove('show');
+            });
+        });
     }
     
-    function addGame(gameData) {
+    async function addGame(gameData) {
+        if (!currentUser) {
+            showToast('Войдите в аккаунт, чтобы добавлять игры', true);
+            return;
+        }
         if (gamesList.some(g => g.id === gameData.id)) {
             showToast(`"${gameData.name}" уже в списке`, true);
             return;
         }
-        gamesList.push({
+        const newGame = {
             id: gameData.id,
             name: gameData.name,
             cover: gameData.cover,
@@ -1162,14 +1166,25 @@
             rating: 0,
             pinned: false,
             addedDate: Date.now()
-        });
+        };
+        gamesList.push(newGame);
         sortGamesList();
-        saveToLocalAndCloud();
         renderGames(getCurrentFilter());
-        showToast(`✅ "${gameData.name}" добавлена`);
+        const saved = await saveGamesToFirestore(currentUser.uid, gamesList);
+        if (saved) {
+            showToast(`✅ "${gameData.name}" добавлена`);
+        } else {
+            gamesList = gamesList.filter(g => g.id !== gameData.id);
+            renderGames(getCurrentFilter());
+            showToast(`❌ Ошибка сохранения игры`, true);
+        }
     }
     
     async function searchAndAddGame() {
+        if (!currentUser) {
+            showToast('Войдите в аккаунт, чтобы добавлять игры', true);
+            return;
+        }
         const input = document.getElementById('gameSearchInput');
         const query = input.value.trim();
         if (!query) { showToast('Введи название игры', true); return; }
@@ -1181,7 +1196,7 @@
             const results = await searchIGDB(query);
             if (!results.length) { showToast(`"${query}" не найдена`, true); return; }
             const game = results[0];
-            addGame({
+            await addGame({
                 id: game.id,
                 name: game.name,
                 cover: getCoverUrl(game.cover, 'cover_big'),
@@ -1197,6 +1212,10 @@
     }
     
     function randomizeGame() {
+        if (!currentUser) {
+            showToast('Войдите в аккаунт, чтобы использовать рандомайзер', true);
+            return;
+        }
         const planned = gamesList.filter(g => g.status === 'planned');
         const resultDiv = document.getElementById('randomizerResult');
         if (!planned.length) {
@@ -1215,7 +1234,7 @@
         showToast(`🎲 Выпало: "${random.name}"`);
     }
     
-    // Авторизация
+    // === АВТОРИЗАЦИЯ ===
     function openModal(loginMode = true) {
         isLoginMode = loginMode;
         modalTitle.textContent = loginMode ? 'Вход' : 'Регистрация';
@@ -1254,11 +1273,16 @@
     }
     
     async function logout() {
+        if (currentUser && gamesList.length) {
+            await saveGamesToFirestore(currentUser.uid, gamesList);
+        }
         await signOut(auth);
+        gamesList = [];
+        renderGames();
         showToast('👋 Выход выполнен');
     }
     
-    // Обработчики событий
+    // === ОБРАБОТЧИКИ ===
     document.getElementById('loginBtn').onclick = () => openModal(true);
     document.getElementById('registerBtn').onclick = () => openModal(false);
     document.getElementById('logoutBtn').onclick = logout;
@@ -1313,7 +1337,7 @@
         };
     });
     
-    // ========== ОСНОВНАЯ ЛОГИКА ЗАГРУЗКИ ==========
+    // === ОСНОВНАЯ ЛОГИКА ===
     onAuthStateChanged(auth, async (user) => {
         currentUser = user;
         if (user) {
@@ -1323,58 +1347,29 @@
             userEmailSpan.style.display = 'block';
             userEmailSpan.textContent = user.email;
             
-            // Загружаем данные из Firestore
             const cloudGames = await loadGamesFromFirestore(user.uid);
             if (cloudGames.length > 0) {
                 gamesList = cloudGames;
                 sortGamesList();
-                saveToLocalAndCloud(); // обновим кэш
                 renderGames('all');
                 showToast(`📥 Загружено ${gamesList.length} игр из облака`);
             } else {
-                // Новый пользователь — проверяем, есть ли локальные данные (неавторизованные)
-                const localSaved = localStorage.getItem('1moregame_local');
-                if (localSaved) {
-                    try {
-                        const localGames = JSON.parse(localSaved);
-                        if (localGames.length > 0) {
-                            // Переносим локальные игры в облако
-                            gamesList = localGames;
-                            sortGamesList();
-                            await saveGamesToFirestore(user.uid, gamesList);
-                            saveToLocalAndCloud();
-                            renderGames('all');
-                            showToast(`☁️ Ваши игры перенесены в облако! Всего: ${gamesList.length}`);
-                        } else {
-                            gamesList = [];
-                            renderGames('all');
-                            showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
-                        }
-                    } catch(e) {
-                        gamesList = [];
-                        renderGames('all');
-                        showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
-                    }
-                } else {
-                    gamesList = [];
-                    renderGames('all');
-                    showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
-                }
+                gamesList = [];
+                renderGames('all');
+                showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
             }
         } else {
             loginBtn.style.display = 'block';
             registerBtn.style.display = 'block';
             logoutBtn.style.display = 'none';
             userEmailSpan.style.display = 'none';
-            loadFromLocal();
-            sortGamesList();
+            gamesList = [];
             renderGames('all');
         }
         updateStats();
     });
     
-    console.log('🔥 1MOREGAME | облачная синхронизация включена');
+    console.log('🔥 1MOREGAME | готова к работе с шрифтом Mighty Souly');
 </script>
 </body>
-</html>
 </html>
