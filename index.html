@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>1MOREGAME — игровой чеклист</title>
     
-    <!-- EmailJS для отправки писем -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <style>
         * {
             margin: 0;
@@ -167,30 +164,27 @@
             display: none;
         }
 
-/* ЛОГОТИП — ЖИРНЫЙ ТЕКСТ С НЕОНОВЫМ ГРАДИЕНТОМ */
-.logo {
-    font-size: 4.5rem;
-    font-weight: 900;
-    letter-spacing: 0px;  /* буквы максимально плотно */
-    background: linear-gradient(135deg, #ff2d7a, #b400ff, #00d4ff, #ff2d7a);
-    background-size: 240% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: gradientFlow 6s ease infinite;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 15px rgba(180, 0, 255, 0.4), 
-                 0 0 30px rgba(255, 45, 122, 0.2);
-    font-family: 'Segoe UI', 'Motiva Sans', system-ui, -apple-system, sans-serif;
-}
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ff2d7a, #b400ff, #00d4ff, #ff2d7a);
+            background-size: 240% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 6s ease infinite;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(180, 0, 255, 0.4), 0 0 30px rgba(255, 45, 122, 0.2);
+        }
 
-@keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         .stats-bar {
             display: flex;
@@ -730,7 +724,6 @@
 </head>
 <body>
 
-<!-- Кнопки -->
 <div class="auth-buttons" id="authButtons">
     <button class="auth-btn" id="loginBtn">🔐 ВОЙТИ</button>
     <button class="auth-btn" id="registerBtn">📝 РЕГИСТРАЦИЯ</button>
@@ -738,7 +731,6 @@
 </div>
 <div class="user-email" id="userEmail"></div>
 
-<!-- Модальное окно -->
 <div id="authModal" class="modal">
     <div class="modal-content">
         <h3 id="modalTitle">Вход</h3>
@@ -751,10 +743,7 @@
 
 <div class="container">
     <div class="header">
-        <!-- ЛОГОТИП — картинка вместо текста -->
-        <div class="logo">
-            <img src="logo1mg.png" alt="1MOREGAME">
-        </div>
+        <div class="logo">1MOREGAME</div>
 
         <div class="stats-bar" id="statsBar">
             <div class="stat-item total">📊 <span id="statTotal">0</span> всего</div>
@@ -803,7 +792,6 @@
     <footer>1MOREGAME • твой игровой чеклист • данные в облаке 🔐</footer>
 </div>
 
-<!-- Firebase и основной код -->
 <script type="importmap">
     {
         "imports": {
@@ -816,10 +804,9 @@
 
 <script type="module">
     import { initializeApp } from "firebase/app";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
     import { getFirestore, doc, setDoc, getDoc, collection, query, getDocs, deleteDoc, writeBatch } from "firebase/firestore";
     
-    // КОНФИГУРАЦИЯ FIREBASE
     const firebaseConfig = {
         apiKey: "AIzaSyAGdt9hzBzbP4PWfPw4TPvc0iXTbnfBDwU",
         authDomain: "onemoregame-1416f.firebaseapp.com",
@@ -830,17 +817,14 @@
         measurementId: "G-SPG8CWB1F0"
     };
     
-    // КЛЮЧИ IGDB
     const TWITCH_CLIENT_ID = '40v4o67tpwiavbmv3sygyxzrz0icbz';
     const TWITCH_CLIENT_SECRET = '5br4gno5vbsrijbtmfkpkyzsyni8x7';
     const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
     
-    // Инициализация Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     
-    // Состояние
     let gamesList = [];
     let currentAccessToken = null;
     let tokenExpiration = 0;
@@ -850,7 +834,6 @@
     let currentUser = null;
     let isLoginMode = true;
     
-    // DOM элементы
     const modal = document.getElementById('authModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalSubmitBtn = document.getElementById('modalSubmitBtn');
@@ -870,8 +853,9 @@
         setTimeout(() => toast.remove(), 2500);
     }
     
-    // Сохранение в Firestore
+    // ========== FIRESTORE СИНХРОНИЗАЦИЯ ==========
     async function saveGamesToFirestore(userId, games) {
+        if (!userId || !games) return;
         try {
             const userGamesRef = collection(db, 'users', userId, 'games');
             const oldGames = await getDocs(userGamesRef);
@@ -886,12 +870,12 @@
             await batch.commit();
             console.log('✅ Сохранено в облако');
         } catch (error) {
-            console.error('Ошибка сохранения:', error);
+            console.error('Ошибка сохранения в Firestore:', error);
         }
     }
     
-    // Загрузка из Firestore
     async function loadGamesFromFirestore(userId) {
+        if (!userId) return [];
         try {
             const userGamesRef = collection(db, 'users', userId, 'games');
             const snapshot = await getDocs(userGamesRef);
@@ -899,30 +883,35 @@
             snapshot.forEach((doc) => {
                 games.push(doc.data());
             });
+            console.log(`📥 Загружено ${games.length} игр из облака`);
             return games;
         } catch (error) {
-            console.error('Ошибка загрузки:', error);
+            console.error('Ошибка загрузки из Firestore:', error);
             return [];
         }
     }
     
-    // Локальное сохранение
-    function saveToLocal() {
+    // Сохранение в localStorage (кэш) и в Firestore
+    function saveToLocalAndCloud() {
         localStorage.setItem('1moregame_local', JSON.stringify(gamesList));
         updateStats();
+        if (currentUser) {
+            saveGamesToFirestore(currentUser.uid, gamesList);
+        }
     }
     
-function loadFromLocal() {
-    const saved = localStorage.getItem('1moregame_local');
-    if (saved) {
-        try {
-            gamesList = JSON.parse(saved);
-        } catch(e) { console.warn(e); }
+    // Загрузка из localStorage (кэш) — только для неавторизованных
+    function loadFromLocal() {
+        const saved = localStorage.getItem('1moregame_local');
+        if (saved) {
+            try {
+                gamesList = JSON.parse(saved);
+            } catch(e) { console.warn(e); }
+        }
+        if (!gamesList.length) {
+            gamesList = [];
+        }
     }
-    if (!gamesList.length) {
-        gamesList = [];  // ← теперь пустой список
-    }
-}
     
     function updateStats() {
         const total = gamesList.length;
@@ -958,10 +947,9 @@ function loadFromLocal() {
         if (game) {
             game.rating = rating;
             sortGamesList();
-            saveToLocal();
+            saveToLocalAndCloud();
             renderGames(getCurrentFilter());
             showToast(`⭐ Рейтинг "${game.name}": ${rating}/5`);
-            if (currentUser) saveGamesToFirestore(currentUser.uid, gamesList);
         }
     }
     
@@ -970,10 +958,9 @@ function loadFromLocal() {
         if (game) {
             game.pinned = !game.pinned;
             sortGamesList();
-            saveToLocal();
+            saveToLocalAndCloud();
             renderGames(getCurrentFilter());
             showToast(game.pinned ? `📌 "${game.name}" закреплена` : `📍 "${game.name}" откреплена`);
-            if (currentUser) saveGamesToFirestore(currentUser.uid, gamesList);
         }
     }
     
@@ -1051,10 +1038,9 @@ function loadFromLocal() {
                 if (game) {
                     game.status = newStatus;
                     sortGamesList();
-                    saveToLocal();
+                    saveToLocalAndCloud();
                     renderGames(getCurrentFilter());
                     showToast(`статус "${game.name}" обновлён`);
-                    if (currentUser) saveGamesToFirestore(currentUser.uid, gamesList);
                 }
             });
         });
@@ -1065,10 +1051,9 @@ function loadFromLocal() {
                 if (confirm(`❓ Удалить "${gameName}"?`)) {
                     gamesList = gamesList.filter(g => g.id !== gameId);
                     sortGamesList();
-                    saveToLocal();
+                    saveToLocalAndCloud();
                     renderGames(getCurrentFilter());
                     showToast(`🗑 "${gameName}" удалена`);
-                    if (currentUser) saveGamesToFirestore(currentUser.uid, gamesList);
                 }
             });
         });
@@ -1179,10 +1164,9 @@ function loadFromLocal() {
             addedDate: Date.now()
         });
         sortGamesList();
-        saveToLocal();
+        saveToLocalAndCloud();
         renderGames(getCurrentFilter());
         showToast(`✅ "${gameData.name}" добавлена`);
-        if (currentUser) saveGamesToFirestore(currentUser.uid, gamesList);
     }
     
     async function searchAndAddGame() {
@@ -1254,9 +1238,8 @@ function loadFromLocal() {
                 await signInWithEmailAndPassword(auth, email, password);
                 showToast('✅ Добро пожаловать!');
             } else {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                await sendEmailVerification(userCredential.user);
-                showToast('✅ Регистрация успешна! Проверь почту для подтверждения.');
+                await createUserWithEmailAndPassword(auth, email, password);
+                showToast('✅ Регистрация успешна! Теперь войди');
             }
             modal.classList.remove('show');
         } catch (error) {
@@ -1275,7 +1258,7 @@ function loadFromLocal() {
         showToast('👋 Выход выполнен');
     }
     
-    // Обработчики
+    // Обработчики событий
     document.getElementById('loginBtn').onclick = () => openModal(true);
     document.getElementById('registerBtn').onclick = () => openModal(false);
     document.getElementById('logoutBtn').onclick = logout;
@@ -1330,7 +1313,7 @@ function loadFromLocal() {
         };
     });
     
-    // Загрузка данных при входе
+    // ========== ОСНОВНАЯ ЛОГИКА ЗАГРУЗКИ ==========
     onAuthStateChanged(auth, async (user) => {
         currentUser = user;
         if (user) {
@@ -1339,18 +1322,44 @@ function loadFromLocal() {
             logoutBtn.style.display = 'block';
             userEmailSpan.style.display = 'block';
             userEmailSpan.textContent = user.email;
+            
+            // Загружаем данные из Firestore
             const cloudGames = await loadGamesFromFirestore(user.uid);
             if (cloudGames.length > 0) {
                 gamesList = cloudGames;
                 sortGamesList();
-                saveToLocal();
+                saveToLocalAndCloud(); // обновим кэш
                 renderGames('all');
                 showToast(`📥 Загружено ${gamesList.length} игр из облака`);
             } else {
-                loadFromLocal();
-                sortGamesList();
-                renderGames('all');
-                if (gamesList.length) await saveGamesToFirestore(user.uid, gamesList);
+                // Новый пользователь — проверяем, есть ли локальные данные (неавторизованные)
+                const localSaved = localStorage.getItem('1moregame_local');
+                if (localSaved) {
+                    try {
+                        const localGames = JSON.parse(localSaved);
+                        if (localGames.length > 0) {
+                            // Переносим локальные игры в облако
+                            gamesList = localGames;
+                            sortGamesList();
+                            await saveGamesToFirestore(user.uid, gamesList);
+                            saveToLocalAndCloud();
+                            renderGames('all');
+                            showToast(`☁️ Ваши игры перенесены в облако! Всего: ${gamesList.length}`);
+                        } else {
+                            gamesList = [];
+                            renderGames('all');
+                            showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
+                        }
+                    } catch(e) {
+                        gamesList = [];
+                        renderGames('all');
+                        showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
+                    }
+                } else {
+                    gamesList = [];
+                    renderGames('all');
+                    showToast(`✨ Добро пожаловать! Добавь свои первые игры`);
+                }
             }
         } else {
             loginBtn.style.display = 'block';
@@ -1364,7 +1373,8 @@ function loadFromLocal() {
         updateStats();
     });
     
-    console.log('🔥 1MOREGAME | полная версия с логотипом | неоновое мерцание');
+    console.log('🔥 1MOREGAME | облачная синхронизация включена');
 </script>
 </body>
+</html>
 </html>
