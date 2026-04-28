@@ -2,8 +2,6 @@
   {
     "id": 1,
     "name": "The Witcher 3: Wild Hunt",
-    "year": null,
-    "genre": [],    // <--- После этой строки ДОЛЖНА быть запятая
     "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaarl.webp",
     "description": "..."
   },
