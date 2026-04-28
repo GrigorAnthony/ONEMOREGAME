@@ -75,306 +75,230 @@
   {
     "id": 13,
     "name": "Horizon Forbidden West",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Horizon+Forbidden+West",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2gvu.webp",
+    "description": "Прямое продолжение приключений охотницы Элой, которая отправляется в запретные западные земли, чтобы найти способ остановить таинственную заразу, уничтожающую жизнь на планете. В игре вас ждут новые виды роботов-динозавров, улучшенная система ближнего боя, возможность летать на крылатых машинах и захватывающий сюжет о поиске ответов на вопросы, оставшиеся после первой части."
   },
   {
     "id": 14,
     "name": "The Last of Us Part I",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=The+Last+of+Us+Part+I",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coa1gq.webp",
+    "description": "Полностью переработанная версия культового постапокалиптического приключения, где контрабандист Джоэл должен доставить 14-летнюю девочку Элли через охваченную заражёнными Америку. Помимо современной графики и улучшенного геймплея, игра предлагает одну из самых пронзительных историй в мире видеоигр — о том, как боль от утраты может привести как к великому благу, так и к страшному греху."
   },
   {
     "id": 15,
     "name": "The Last of Us Part II",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=The+Last+of+Us+Part+II",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5ziw.webp",
+    "description": "Жестокая и эмоциональная история о мести, последствиях и цене, которую приходится платить за выживание в мире без надежды. Спустя пять лет после событий первой части, Элли отправляется в путешествие через руины Сиэтла и Вайоминга, чтобы отомстить за личную трагедию, но на этом пути ей предстоит столкнуться с ужасами, которые заставят её усомниться в правильности собственных поступков."
   },
   {
     "id": 16,
     "name": "Death Stranding",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Death+Stranding",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobksf.webp",
+    "description": "Уникальная игра от Хидео Кодзимы о путешественнике Сэме Бриджесе, который должен восстановить связь между изолированными городами в мире, опустошённом загадочным катаклизмом. Вам предстоит перевозить грузы через опасную местность, спасаться от призрачных существ и мародёров, чтобы объединить выживших и предотвратить полное уничтожение человечества."
   },
   {
     "id": 17,
     "name": "Ghost of Tsushima",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Ghost+of+Tsushima",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2crj.webp",
+    "description": "Самурайский экшен в открытом мире от Sucker Punch Productions, рассказывающий о выживании самурая Дзина Сакая на японском острове Цусима во время первого монгольского вторжения. Нарушив кодекс чести самураев, Дзин становится «Призраком» — мастером скрытных убийств, использующим хитрость и страх, чтобы изгнать захватчиков и спасти свой народ."
   },
   {
     "id": 18,
     "name": "Assassin's Creed Valhalla",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Assassin's+Creed+Valhalla",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2ed3.webp",
+    "description": "Ролевой экшен о викингах, где вы играете за Эйвора, легендарного воина-викинга, ведущего свой клан из суровой Норвегии к берегам англосаксонской Англии. Вам предстоит строить поселения, грабить монастыри, заключать союзы, участвовать в масштабных осадах и погружаться в мифологию скандинавов через таинственные видения."
   },
   {
     "id": 19,
     "name": "Assassin's Creed Odyssey",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Assassin's+Creed+Odyssey",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2nul.webp",
+    "description": "Ролевой экшен, действие которого разворачивается в Древней Греции во времена Пелопоннесской войны. Вы играете за наёмника Кассандру или Алексиоса, путешествуете по огромному миру, участвуете в эпических морских сражениях, влияете на ход войны между Афинами и Спартой, а также раскрываете тайну своего происхождения, связанную с могущественным орденом."
   },
   {
     "id": 20,
     "name": "Assassin's Creed Origins",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Assassin's+Creed+Origins",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rbe.webp",
+    "description": "Перезапуск серии, действие которого разворачивается в Древнем Египте в эпоху Клеопатры и Юлия Цезаря. Вы играете за Байека — меджая (защитника народа), который после личной трагедии начинает тайную войну с Орденом Древних, что в итоге приводит к созданию первого братства убийц — ассасинов."
   },
   {
     "id": 21,
     "name": "Far Cry 3",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Far+Cry+3",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1vpd.webp",
+    "description": "Культовый экшен в открытом мире, где главный герой Джейсон Броуди оказывается на тропическом острове, захваченном пиратами и наёмниками сумасшедшего антагониста Вааса. Чтобы спасти своих друзей, Джейсону приходится охотиться на диких зверей, штурмовать вражеские лагеря, учиться выживать в джунглях и постепенно превращаться из беззаботного туриста в безжалостного убийцу."
   },
   {
     "id": 22,
     "name": "Far Cry 4",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Far+Cry+4",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2npa.webp",
+    "description": "Экшен в открытом мире, действие которого разворачивается в вымышленной гималайской стране Кират, захваченной жестоким королём Пэйганом Мином. Вы играете за Аджая Гейла, который возвращается на родину, чтобы развеять прах матери, но оказывается втянутым в гражданскую войну между королевскими силами и повстанцами «Золотой путь»."
   },
   {
     "id": 23,
     "name": "Far Cry 5",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Far+Cry+5",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co21a6.webp",
+    "description": "Экшен в открытом мире, действие которого разворачивается в вымышленном округе Хоуп, штата Монтана, захваченном фанатичным религиозным культом под предводительством харизматичного пророка Иосифа Сида. Вы — молодой помощник шерифа, который пытается освободить жителей округа, объединяя сопротивление из местных жителей и используя любые средства — от ковбойских револьверов до авиации."
   },
   {
     "id": 24,
     "name": "Far Cry 6",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Far+Cry+6",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2npg.webp",
+    "description": "Экшен в открытом мире, действие которого разворачивается на вымышленном тропическом острове Яра, где царит жестокая диктатура президента Антона Кастильо. Вы играете за Дани, партизана, который пытается свергнуть режим, используя импровизированное оружие, технику и помощь других повстанцев по всей стране."
   },
   {
     "id": 25,
-    "name": "Skyrim",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Skyrim",
-    "description": "Local database entry"
+    "name": "The Elder Scrolls V: Skyrim",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1tnw.webp",
+    "description": "Легендарная ролевая игра с открытым миром, где вы играете за Драконорожденного — героя, способного побеждать драконов и поглощать их души. Вам предстоит исследовать суровые северные земли Скайрима, вступить в одну из враждующих фракций, овладеть магией, сражаться с драконами и раскрыть тайну пророчества о возвращении древнего дракона Алдуина."
   },
   {
     "id": 26,
-    "name": "Oblivion",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Oblivion",
-    "description": "Local database entry"
+    "name": "The Elder Scrolls IV: Oblivion",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co8fpz.webp",
+    "description": "Культовая ролевая игра с открытым миром, действие которой разворачивается в столичной провинции Сиродил Тамриэля. Игрок должен найти законного наследника престола и закрыть Врата Обливиона, через которые в мир вторгаются демонические даэдра, одновременно вступая в гильдии воров, магов или тёмное братство."
   },
   {
     "id": 27,
     "name": "Fallout 3",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Fallout+3",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1ycw.webp",
+    "description": "Постапокалиптическая ролевая игра с открытым миром, действие которой разворачивается в радиоактивных пустошах вокруг Вашингтона. Вы играете за обитателя подземного убежища, который отправляется в опасный мир послевоенной Америки на поиски своего отца, попутно сталкиваясь с мутантами, рейдерами и другими выжившими в борьбе за воду и ресурсы."
   },
   {
     "id": 28,
-    "name": "Fallout New Vegas",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Fallout+New+Vegas",
-    "description": "Local database entry"
+    "name": "Fallout: New Vegas",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1u60.webp",
+    "description": "Постапокалиптическая ролевая игра, действие которой разворачивается в пустыне Мохаве, на руинах Лас-Вегаса, где несколько фракций борются за контроль над источником электричества. Вы играете за курьера, которого оставили умирать в пустыне, а теперь он ищет мести и оказывается втянутым в войну местных группировок."
   },
   {
     "id": 29,
     "name": "Fallout 4",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Fallout+4",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1yc6.webp",
+    "description": "Постапокалиптическая ролевая игра, действие которой разворачивается в руинах Бостона и окрестностей, известных как Содружество. Вы играете за выжившего из Убежища 111, который отправляется на поиски похищенного сына в мир, полный радиоактивных пустошей, мутантов, рейдеров и могущественных фракций."
   },
   {
     "id": 30,
     "name": "Fallout 76",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Fallout+76",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1yc4.webp",
+    "description": "Многопользовательская постапокалиптическая ролевая игра, действие которой разворачивается в живописных, но опасных пустошах Западной Вирджинии, спустя 25 лет после ядерной войны. Вы играете за одного из первых выживших, которые покидают Убежище 76, и ваша задача — исследовать пустоши, сражаться с мутантами, строить базы, раскрывать тайны региона и решать — помогать ли другим выжившим или воевать с ними."
   },
   {
     "id": 31,
     "name": "Dark Souls",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Dark+Souls",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1x78.webp",
+    "description": "Культовая хардкорная ролевая игра, действие которой разворачивается в мрачном и суровом королевстве Лордран, охваченном проклятием нежити. Вы играете за одного из проклятых, который должен пройти через смертельные ловушки, сразиться с чудовищными боссами и в конечном итоге решить судьбу угасающего Огня — поддерживать его или оставить мир во тьме."
   },
   {
     "id": 32,
     "name": "Dark Souls II",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Dark+Souls+II",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobysr.webp",
+    "description": "Хардкорная ролевая игра, действие которой разворачивается в мрачном королевстве Дранглек, где проклятие нежити принимает новые, ещё более опасные формы. Вы играете за проклятого путника, который ищет лекарство от проклятия, путешествуя по разнообразным локациям, сражаясь с полчищами врагов и боссами, а также разгадывая тайны человеческой памяти и природы тьмы."
   },
   {
     "id": 33,
     "name": "Dark Souls III",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Dark+Souls+III",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob9ed.webp",
+    "description": "Эпическое завершение хардкорной серии, действие которого разворачивается в гибнущем королевстве Лотрик, где в последний раз вспыхивает пламя Огня. Вы играете за Безымянного Проклятого, который должен победить могущественных лордов Пепла и вернуть их души к умирающему Огню, попутно сражаясь с ужасающими порождениями тьмы и раскрывая трагическую историю этого мира."
   },
   {
     "id": 34,
     "name": "Bloodborne",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Bloodborne",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cob99l.webp",
+    "description": "Хардкорная action/RPG в готическом сеттинге от создателей Dark Souls, действие которой разворачивается в проклятом городе Ярнам, охваченном чумой, превращающей людей в оборотней. Вы — охотник, который должен разгадать тайну загадочной болезни, истребляя чудовищ, исследуя мрачные улицы и противостоять древним ужасам, пробудившимся от многовекового сна."
   },
   {
     "id": 35,
     "name": "Sekiro: Shadows Die Twice",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Sekiro:+Shadows+Die+Twice",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2a23.webp",
+    "description": "Хардкорный экшен от FromSoftware, действие которого разворачивается в Японии периода Сэнгоку, где вы играете за опытного синоби. Потеряв руку и своего господина, герой отправляется в опасное путешествие, полное сражений с демонами, самураями и монстрами, используя механическую руку-протез и уникальную систему боя, основанную на выносливости врага."
   },
   {
     "id": 36,
-    "name": "Elden Ring Shadow of the Erdtree",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Elden+Ring+Shadow+of+the+Erdtree",
-    "description": "Local database entry"
+    "name": "Elden Ring: Shadow of the Erdtree",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co7sly.webp",
+    "description": "Действие DLC разворачивается в землях Теней, где вас ждут новые тайны. Открывайте неизведанные места, сражайтесь с грозными противниками и наслаждайтесь вкусом победы. Следите за увлекательными взаимоотношениями героев. Погрузитесь в историю, полную драм и интриг, которая никого не оставит равнодушным."
   },
   {
     "id": 37,
     "name": "BioShock",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=BioShock",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mli.webp",
+    "description": "Культовый шутер с элементами RPG, действие которого разворачивается в подводном утопическом городе Восторг, построенном в 1940-х годах как убежище для лучших умов человечества. Вы выживаете после авиакатастрофы и оказываетесь в этом городе, который превратился в руины, где бродят мутанты-люди, одержимые мистическим веществом под названием «АДАМ», и где вам предстоит раскрыть тайну безумного диктатора Эндрю Райана."
   },
   {
     "id": 38,
-    "name": "BioShock Infinite",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=BioShock+Infinite",
-    "description": "Local database entry"
+    "name": "BioShock: Infinite",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2n12.webp",
+    "description": "Шутер в стиле стимпанк, действие которого разворачивается в городе Колумбия — летающем поселении, построенном американскими ультранационалистами в начале XX века. Вы — бывший детектив Букер ДеВитт, которого наняли найти девушку Элизабет, обладающую способностью открывать разрывы между реальностями."
   },
   {
     "id": 39,
     "name": "Half-Life 2",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Half-Life+2",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nmw.webp",
+    "description": "Шутер от Valve, действие которого разворачивается в антиутопичном будущем, где Земля порабощена инопланетной империей Альянс. Вы снова играете за учёного Гордона Фримена, который пробуждается спустя годы и должен возглавить сопротивление человечества, используя физику окружающей среды, транспортные средства и легендарную монтировку.y"
   },
   {
     "id": 40,
-    "name": "Half-Life Alyx",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Half-Life+Alyx",
-    "description": "Local database entry"
+    "name": "Half-Life: Alyx",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co87vg.webp",
+    "description": "Шутер от Valve для устройств виртуальной реальности, действие которого разворачивается между событиями первой и второй частей Half‑Life. Вы играете за Аликс Вэнс, которая пытается спасти своего отца, исследует руины Сити‑17, использует гравитационные перчатки для притягивания предметов и сражается с инопланетным Альянсом."
   },
   {
     "id": 41,
     "name": "Portal",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Portal",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coay61.webp",
+    "description": "Головоломка от Valve, действие которой разворачивается в стерильных лабораториях Aperture Science под управлением саркастичного ИИ GLaDOS . Вы играете за девушку Челл, которая с помощью портальной пушки создаёт взаимосвязанные проходы в стенах и решает пространственные головоломки, чтобы сбежать из опасного комплекса."
   },
   {
     "id": 42,
     "name": "Portal 2",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Portal+2",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rs4.webp",
+    "description": "Головоломка от первого лица и продолжение культовой игры 2007 года, действие которой снова разворачивается в лабораториях Aperture Science, но на этот раз вы изучаете заброшенный комплекс прошлого. Вы играете за Челл, которая вместе с болтливым шаром Уитли пытается сбежать от обезумевшего ИИ GLaDOS, используя портальную пушку и взаимодействуя с огромными механизмами, жидкостями и лазерами."
   },
   {
     "id": 43,
     "name": "Left 4 Dead 2",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Left+4+Dead+2",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1y2f.webp",
+    "description": "Зомби-шутер от Valve, действие которого разворачивается на юге США в разгар эпидемии, превращающей людей в агрессивных заражённых. Вы играете за одного из четырёх выживших, пробивающихся через орды зомби и «особых» заражённых, чтобы добраться до безопасных убежищ и эвакуационных точек."
   },
   {
     "id": 44,
     "name": "DOOM (2016)",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=DOOM+(2016)",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nc7.webp",
+    "description": "Перезапуск культовой серии шутеров, где вы снова играете за легендарного Палача Рока, пробуждённого от векового сна на марсианской базе UAC. Вы должны бешено перемещаться по уровням, разрывать демонов на части в жестоких добиваниях и под ритмичную метал-музыку уничтожить врата ада."
   },
   {
     "id": 45,
     "name": "DOOM Eternal",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=DOOM+Eternal",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p5n.webp",
+    "description": "Динамичный шутер и прямое продолжение перезапуска 2016 года, где Палач Рока снова сражается с полчищами демонов, но теперь на Земле и в других мирах. В игре добавились вертикальное перемещение, добивания демонов для восстановления ресурсов и тактический выбор оружия против бронированных врагов с разными уязвимостями."
   },
   {
     "id": 46,
     "name": "Metro 2033",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Metro+2033",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rd6.webp",
+    "description": "Постапокалиптический шутер с элементами хоррора, основанный на романе Дмитрия Глуховского, действие которого разворачивается в московском метро после ядерной войны. Вы играете за Артёма, молодого жителя станции ВДНХ, который отправляется в опасное путешествие по туннелям, чтобы предупредить другие станции о надвигающейся угрозе мутантов."
   },
   {
     "id": 47,
-    "name": "Metro Last Light",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Metro+Last+Light",
-    "description": "Local database entry"
+    "name": "Metro: Last Light",
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2h9d.webp",
+    "description": "Прямое продолжение постапокалиптического шутера Metro 2033, действие которого разворачивается в московском метро через год после событий первой части. Вы снова играете за Артёма, который пытается найти последнего выжившего «чёрного» и предотвратить гражданскую войну между выжившими фракциями."
   },
   {
     "id": 48,
     "name": "Metro Exodus",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Metro+Exodus",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaroh.webp",
+    "description": "Постапокалиптический шутер с открытыми уровнями и элементами выживания, завершающий сюжетную арку Артёма из предыдущих игр. В отличие от линейных туннелей метро, вы путешествуете на бронепоезде через заражённую радиоактивными пустошами Россию, сражаясь с мутантами, бандитами и другими угрозами в поисках безопасного для жизни места."
   },
   {
     "id": 49,
     "name": "Wolfenstein: The New Order",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Wolfenstein:+The+New+Order",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co21c0.webp",
+    "description": "Шутер от MachineGames, действие которого разворачивается в альтернативной хронологии, где нацисты выиграли Вторую мировую войну и захватили весь мир. Вы играете за Би Джея Бласковица, американского солдата, который после 14-летней комы пробуждается в 1960 году и должен возглавить сопротивление против нацистского режима, управляющего людьми с помощью супертехнологий."
   },
   {
     "id": 50,
     "name": "Wolfenstein II: The New Colossus",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Wolfenstein+II:+The+New+Colossus",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co21c5.webp",
+    "description": "Прямое продолжение The New Order, действие которого разворачивается в оккупированной нацистами Америке 1961 года. Вы снова играете за Би Джея Бласковица, который после почти смертельного ранения собирает команду единомышленников и поднимает вооружённое восстание против режима, планируя атаковать огромную передвижную крепость."
   },
   {
     "id": 51,
