@@ -14,26 +14,20 @@
   {
     "id": 3,
     "name": "Red Dead Redemption 2",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Red+Dead+Redemption+2",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.webp",
+    "description": "Red Dead Redemption 2 — это грандиозная вестерн-одиссея от Rockstar Games, действие которой разворачивается на закате Дикого Запада. Вы играете за Артура Моргана, верного члена банды Ван дер Линде, и пытаетесь выжить в мире, где закон, конкуренты и внутренние распри ставят под угрозу существование вашего братства."
   },
   {
     "id": 4,
     "name": "Grand Theft Auto V",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Grand+Theft+Auto+V",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lbd.webp",
+    "description": "Grand Theft Auto V — это культовый боевик в открытом мире от Rockstar North, действие которого разворачивается в вымышленном штате Сан-Андреас и его сердце — городе Лос-Сантос. Трое совершенно разных преступников — опытный грабитель Майкл, психопат Тревор и уличный парень Франклин — объединяются, чтобы провернуть серию дерзких ограблений в мире, где продажность и роскошь соседствуют с нищетой и отчаянием."
   },
   {
     "id": 5,
     "name": "Minecraft",
-    "year": null,
-    "genre": [],
-    "cover": "https://via.placeholder.com/300x450?text=Minecraft",
-    "description": "Local database entry"
+    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co8fu7.webp",
+    "description": "Minecraft — это легендарная игра-песочница с процедурно генерируемым миром, состоящим из кубических блоков, где нет конкретной цели, а есть абсолютная свобода. Вы можете строить невероятные сооружения в режиме «Творчество» или добывать ресурсы, сражаться с монстрами и выживать в суровом окружении в режиме «Выживание»."
   },
   {
     "id": 6,
