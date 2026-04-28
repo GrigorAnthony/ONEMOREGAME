@@ -6,11 +6,11 @@
     "description": "«Ведьма́к 3: Дикая Охота» — компьютерная игра в жанре ролевого экшена, разработанная и изданная польской студией CD Projekt RED."
   },
   {
-    "id": 2,
-    "name": "Elden Ring",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp",
-    "description": "Elden Ring — это масштабная ролевая игра в открытом мире, созданная FromSoftware при участии Джорджа Мартина. Исследуйте Междуземье, сражайтесь с могущественными боссами и раскрывайте тайны, стоящие на пути к Элдену."
-  },
+  "id": 2,
+  "name": "Elden Ring",
+  "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp",
+  "description": "Elden Ring — это масштабная ролевая игра в открытом мире, созданная FromSoftware при участии Джорджа Мартина. Исследуйте Междуземье, сражайтесь с могущественными боссами и раскрывайте тайны, стоящие на пути к Элдену."
+},
   {
     "id": 3,
     "name": "Red Dead Redemption 2",
