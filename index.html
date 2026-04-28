@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     
     <style>
-        /* ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ */
+        /* ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ - скопируй их из предыдущей версии, но я даю сокращённый рабочий вариант */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -780,10 +780,11 @@
     // ========== ЛОКАЛЬНЫЙ ПОИСК ПО JSON ==========
     async function loadLocalGames() {
         try {
-            const response = await fetch('/games.json');
+            const response = await fetch('/games.json?t=' + Date.now());
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             localGamesDB = await response.json();
             console.log(`✅ Загружено ${localGamesDB.length} игр из локальной базы`);
+            console.log('Первая игра:', localGamesDB[0]);
         } catch (error) {
             console.error('❌ Ошибка загрузки games.json:', error);
             localGamesDB = [];
