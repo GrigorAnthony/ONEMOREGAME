@@ -1035,7 +1035,7 @@
                 <div class="status-badge">${getStatusEmoji(game.status)}</div>
                 <div class="info">
                     <div class="game-title">${escapeHtml(game.name)}</div>
-                    <div class="description">${game.description ? escapeHtml(game.description.substring(0, 80)) : '⚡ описание из локальной базы'}</div>
+                    <div class="description" title="${escapeHtml(game.description || '')}">${game.description ? escapeHtml(game.description.substring(0, 80)) : '⚡ описание из локальной базы'}</div>
                     <div class="rating">
                         ${[1,2,3,4,5].map(star => `<span class="star ${(game.rating || 0) >= star ? 'active' : ''}" data-id="${game.id}" data-rating="${star}">★</span>`).join('')}
                     </div>
