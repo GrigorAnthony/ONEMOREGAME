@@ -2,10 +2,10 @@
   {
     "id": 1,
     "name": "The Witcher 3: Wild Hunt",
-    "year": 2015,
-    "genre": [],
+    "year": null,
+    "genre": [],    // <--- После этой строки ДОЛЖНА быть запятая
     "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaarl.webp",
-    "description": "«Ведьма́к 3: Дикая Охота» — компьютерная игра в жанре ролевого экшена, разработанная и изданная польской студией CD Projekt RED."
+    "description": "..."
   },
   {
     "id": 2,
